@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculadora de Volumen Sanguíneo</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f2f2f2;
+			color: #333;
+		}
+		h1 {
+			text-align: center;
+			margin-top: 50px;
+			margin-bottom: 30px;
+		}
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		label {
+			font-size: 18px;
+			margin-bottom: 10px;
+		}
+		input[type="number"] {
+			padding: 10px;
+			font-size: 18px;
+			border: none;
+			border-radius: 5px;
+			margin-bottom: 20px;
+			text-align: center;
+			width: 300px;
+		}
+		button {
+			background-color: #4CAF50;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			font-size: 18px;
+			cursor: pointer;
+			margin-bottom: 50px;
+		}
+		button:hover {
+			background-color: #3e8e41;
+		}
+		.result {
+			font-size: 24px;
+			text-align: center;
+			margin-bottom: 50px;
+		}
+		.healthy {
+			color: green;
+		}
+		.caution {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<h1>Calculadora de Volumen Sanguíneo</h1>
+	<form onsubmit="calculateVolume(event)">
+		<label for="height">Altura (cm)</label>
+		<input type="number" id="height" required>
+		<label for="weight">Peso (kg)</label>
+		<input type="number" id="weight" required>
+		<button>Calcular</button>
+	</form>
+	<div class="result"></div>
+
+	<script>
+		function calculateVolume(event) {
+			event.preventDefault();
+			const height = document.getElementById("height").value;
+			const weight = document.getElementById("weight").value;
+			const volume = 0.3669 * Math.pow(height, 3/2) * Math.pow(weight, 0.5);
+			const resultElement = document.querySelector(".result");
+			resultElement.textContent = `Tu volumen sanguíneo es de ${volume.toFixed(2)} ml.`;
+			if (volume < 3000) {
+				resultElement.classList.add("healthy");
+				resultElement.classList.remove("caution");
+			} else {
+				resultElement.classList.add("caution");
+				resultElement.classList.remove("healthy");
+			}
+		}
+	</script>
+</body>
+</html>
